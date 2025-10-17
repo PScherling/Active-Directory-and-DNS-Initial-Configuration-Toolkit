@@ -204,5 +204,5 @@ or on remote log share:
 
 ---
 
-> âš¡ *â€œAutomate. Standardize. Simplify.â€*  
-> This repository is part of Patrick Scherlingâ€™s IT automation toolset for efficient Windows infrastructure deployment.
+> Automate. Standardize. Simplify.  
+> This repository is part of Patrick Scherling's IT automation toolset for efficient Windows infrastructure deployment.
