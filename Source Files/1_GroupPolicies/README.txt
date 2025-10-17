@@ -1,0 +1,1 @@
+Please unzip the zip files before executong the scripts!

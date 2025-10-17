@@ -1,0 +1,15 @@
+﻿Name;SamAccountName;GroupCategory;GroupScope;OUPath;Members
+Administrators;Administrators;Security;DomainLocal;CN=Builtin;not.adm,it-sol.adm
+Domain Admins;Domain Admins;Security;Global;CN=Users;not.adm,it-sol.adm,invent.service.adm,backup.service.adm
+Eurofunk-Admins;Eurofunk-Admins;Security;Global;OU=Eurofunk Administratoren;it-sol.adm,ef-technik.adm,esc-service.adm,not.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,euro.service.adm,ef-test.adm
+Enterprise Admins;Enterprise Admins;Security;Universal;CN=Users;it-sol.adm,not.adm
+Remote Desktop Users;Remote Desktop Users;Security;DomainLocal;CN=Builtin;ef-technik.adm,esc-service.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,ef-test.adm
+Remote Management Users;Remote Management Users;Security;DomainLocal;CN=Builtin;ef-technik.adm,esc-service.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,ef-test.adm
+Group Policy Creator Owners;Group Policy Creator Owners;Security;Global;CN=Users;it-sol.adm,not.adm
+Schema Admins;Schema Admins;Security;Universal;CN=Users;it-sol.adm,not.adm
+Server Operators;Server Operators;Security;DomainLocal;CN=Builtin;it-sol.adm,ef-technik.adm,esc-service.adm,not.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,euro.service.adm,ef-test.adm
+Backup Operators;Backup Operators;Security;DomainLocal;CN=Builtin;it-sol.adm,not.adm
+System-Admins;System-Admins;Security;Global;OU=Systemadministratoren;test.adm
+Docusnap-Benutzer;Docusnap-Benutzer;Security;Global;CN=Users;invent.service.adm
+LAPS-Administratoren;LAPS-Administratoren;Security;Global;CN=Users;it-sol.adm,not.adm
+Backup-Benutzer;Backup-Benutzer;Security;Global;CN=Users;backup.service.adm
