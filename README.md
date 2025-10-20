@@ -162,8 +162,8 @@ Designed for reliability, repeatability, and logging, this toolkit enables syste
 
 ## psc_sconfig integration
 
-<img width="1024" height="769" alt="image" src="https://github.com/user-attachments/assets/9b2073c8-91f4-46a8-a716-18939709e59b" />
-<img width="1024" height="769" alt="image" src="https://github.com/user-attachments/assets/85d3dc2d-c90c-42bb-a74b-2f6d0ff781fb" />
+<img width="1024" height="768" alt="image" src="https://github.com/user-attachments/assets/96fcf5a5-a85f-4c19-b796-a14c7d898d47" />
+<img width="1024" height="768" alt="image" src="https://github.com/user-attachments/assets/f2a83d79-e1ad-4e7c-9837-65fbe00ead8b" />
 
 
 ---
