@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Exports Active Directory user accounts from a selected Organizational Unit (OU) into a structured CSV file.
 	
@@ -67,6 +67,7 @@
 		  Version - 0.0.5 - () - Adaption for efsconfig.
           Version - 0.0.6 - () - Adding more Properties for User to export (like ILS MUC needed)
           Version - 0.0.7 - () - Adding user property "Enabled" to export
+          Version - 0.0.8 - () - Adding "Initials" Property to export
 
           TODO:
 		  
@@ -248,6 +249,7 @@ function EF-Export-ADUsers {
                         GivenName, `
                         Surname, `
                         Name, `
+                        Initials, `
                         HomeDirectory, `
                         HomeDrive, `
                         ProfilePath, `
@@ -327,6 +329,7 @@ function EF-Export-ADUsers {
                 Firstname      = $User.GivenName
                 Lastname       = $User.Surname
                 DisplayName    = $User.Name
+                Initials       = $User.Initials
                 Path           = $selectedOUDName
                 Password       = "Password"       # Default or placeholder password
                 ProfilePath    = $User.ProfilePath
