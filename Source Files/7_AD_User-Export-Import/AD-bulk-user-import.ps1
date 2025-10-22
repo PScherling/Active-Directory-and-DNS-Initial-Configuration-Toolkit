@@ -75,6 +75,7 @@
 		  Version - 0.0.7 - () - Adaption for efsconfig.
           Version - 0.0.8 - () - Adding more Properties for Users (like ILS MUC needed) and reworking the import process for dynamically property linking to user
           Version - 0.0.9 - () - Adding user property "Enabled" to import
+          Version - 0.0.10 - () - Adding property "Initials" ti import
 
           TODO:
 		  
@@ -403,6 +404,7 @@ function EF-Import-ADUsers {
 	        $Lastname 	    = $User.Lastname #Surname
             $Name           = $User.Displayname #Name in AD Users & Computers
             $DisplayName    = $User.Displayname #Displayname at Logon
+            $Initials       = $User.Initials
 	        $Path 		    = $User.Path #This field refers to the OU the user account is to be created in
             $Password       = $User.Password
 	        $ProfilePath    = $User.ProfilePath
@@ -470,6 +472,7 @@ function EF-Import-ADUsers {
     GivenName:         $Firstname
     Surname:           $Lastname
     Displayname:       $Displayname
+    Initials:          $Initials
     OU-Path:           $Path
     Email Address:     $EmailAddress
     Home Directory:    $HomeDirectory
@@ -508,6 +511,7 @@ function EF-Import-ADUsers {
                 }
                 
                 # Add optional fields only if they're not $null
+                if($Initials)         { $ADUserParams["Initials"] = $Initials }
                 if ($EmailAddress)    { $ADUserParams["EmailAddress"] = $EmailAddress }
                 if ($HomeDirectory)   { $ADUserParams["HomeDirectory"] = $HomeDirectory }
                 if ($HomeDrive)       { $ADUserParams["HomeDrive"] = $HomeDrive }
@@ -531,6 +535,7 @@ function EF-Import-ADUsers {
                 Write-Log " GivenName:           $Firstname"
                 Write-Log " Surname:             $Lastname"
                 Write-Log " Displayname:         $Displayname"
+                Write-Log " Initials:            $Initials"
                 Write-Log " OU-Path:             $Path"
                 Write-Log " Email Address:       $EmailAddress"
                 Write-Log " Home Directory:      $HomeDirectory"
