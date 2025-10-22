@@ -4,6 +4,12 @@
 This repository contains a **fully automated PowerShell-based setup framework** for deploying and configuring a complete **Active Directory Domain Controller** with integrated **DNS Server** and post-deployment automation scripts.  
 Designed for reliability, repeatability, and logging, this toolkit enables system administrators to bootstrap an entire Windows Server AD environment from zero, including OU structure, GPOs, users, and groups.
 
+### Release Notes
+| Version| Release Date | Title | Description | Features | Bug Fixes | Known Issues |
+|--------------|--------------|--------------|--------------|--------------|--------------|--------------|
+| **0.0.1** | 22/Oct/2025 | Initial Release | Initial Release | See Key-Features below |  |  |
+
+
 ---
 
 ## Key Features
