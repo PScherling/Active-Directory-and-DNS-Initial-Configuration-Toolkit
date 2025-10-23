@@ -36,14 +36,9 @@ Designed for reliability, repeatability, and logging, this toolkit enables syste
 
 ---
 
-## Domain Configuration
-
-| Parameter | Value |
-|------------|--------|
-| **Domain Name** | `domain.at` |
-| **NetBIOS Name** | `DOMAIN` |
-| **Root OU Name** | `CompanyRoot` |
-| **DNS Forwarders** | `8.8.8.8`, `1.1.1.1` |
+## Network Configuration
+- Static-IP Adress
+- DNS: 127.0.0.1, [Static-IP-Adress]
 
 ---
 
