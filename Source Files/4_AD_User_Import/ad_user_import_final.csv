@@ -9,5 +9,6 @@ comp.service.adm;Company Service;Administrator;Company Service Administrator;Com
 test.adm;Test;Administrator;Test Administrator;Company-Defaultuser;OU=Company Administrators;D=dgWa144i12Pw!
 backup.adm;Backup;Administrator;Backup Administrator;Company-Defaultuser - Backup Administrator;CN=Users;D=dgWa144i12Pw!
 ldapquery;LDAP;Query;LDAP Query User;Company-Defaultuser - LDAP Query User;CN=Users;D=dgWa144i12Pw!
-test.user;Test;User;Test USer;Company-Defaultuser - Testuser;OU=Test,OU=Disponenten,OU=Systembenutzer,OU=Company-Template;D=dgWa144i12Pw!
+test.user;Test;User;Test User;Company-Defaultuser - Testuser;OU=Test,OU=Disponenten,OU=Systembenutzer,OU=Company-Template;D=dgWa144i12Pw!
 backup.service.adm;Backup;Service;Backup Service Administrator;Company-Defaultuser - Backup User;CN=Users;D=dgWa144i12Pw!
+
