@@ -13,7 +13,7 @@
     - Imports group membership definitions from:
       ```
       English (en-US): C:\_it\ADC_Setup\5_AD_AddUserToGroup\ad_group-list_final.csv
-      German (de-DE):  C:\_it\ADC_Setup\5_AD_EF_AddUserToGroup\de-DE\ad_ef-group-list_de_final.csv
+      German (de-DE):  C:\_it\ADC_Setup\5_AD_AddUserToGroup\de-DE\ad_group-list_de_final.csv
       ```
     - Validates the Active Directory domain configuration before execution  
     - Iterates through each group listed in the CSV file and:
@@ -282,7 +282,7 @@ function Add-UsersToGroups-DE {
 	#Import-Module activedirectory
 	  
 	#Store the data from ADUsers.csv in the $ADUsers variable
-	$ImportADGroups = Import-csv -path 'C:\_it\ADC_Setup\5_AD_EF_AddUserToGroup\de-DE\ad_ef-group-list_de_final.csv' -Delimiter ";" #-Encoding utf8 # Standardpfad
+	$ImportADGroups = Import-csv -path 'C:\_it\ADC_Setup\5_AD_AddUserToGroup\de-DE\ad_group-list_de_final.csv' -Delimiter ";" #-Encoding utf8 # Standardpfad
 	$response = ""
 	$Domain = ""
 	$DomainName = ""
