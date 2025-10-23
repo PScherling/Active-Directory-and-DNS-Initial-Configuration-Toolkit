@@ -1,18 +1,14 @@
 ﻿Username;Firstname;Lastname;Displayname;Description;OUPath;Password
-it-sol.adm;IT-Solutions;Administrator;IT-Solutions Administrator;EF-Standarduser - IT-Solutions Administrator;OU=Eurofunk Administratoren;D=dgWa144i12Pw!
-ef-technik.adm;Eurofunk-Technik;Administrator;Eurofunk-Technik Administrator;EF-Standarduser - Eurofunk Technik Administrator;OU=Eurofunk Administratoren;D=dgWa144i12Pw!
-esc-service.adm;ESC-Service;Administrator;ESC-Service Administrator;EF-Standarduser - Eurofunk Service Administartor;OU=Eurofunk Administratoren;D=dgWa144i12Pw!
-not.adm;Notfall;Administrator;Notfall Administrator;EF-Standarduser - Notfall Administrator;OU=Eurofunk Administratoren;D=dgWa144i12Pw!
-techsupp-1st.adm;Technical Support;1st Administrator;Technical Support 1st Administrator;EF-Standarduser - Technical Support Administrator 1;OU=Eurofunk Administratoren;D=dgWa144i12Pw!
-techsupp-2nd.adm;Technical Support;2nd Administartor;Technical Support 2nd Administrator;EF-Standarduser - Technical Support Administrator 2;OU=Eurofunk Administratoren;D=dgWa144i12Pw!
-dbmgmt.adm;Datenbank Management;Administrator;Datenbank Management Administrator;EF-Standarduser - Datenbank Management Administrator;OU=Eurofunk Administratoren;D=dgWa144i12Pw!
-euro.service.adm;Eurofunk Service Dienst;Administrator;Eurofunk Service Dienst Administrator;EF-Standarduser - Eurofunk Service Dienst User;OU=Eurofunk Administratoren;D=dgWa144i12Pw!
-ef-test.adm;Eurofunk Test;Administrator;Eurofunk Test Administrator;EF-Standarduser - Eurofunk Testuser mit Adminberechtigungen;OU=Eurofunk Administratoren;D=dgWa144i12Pw!
-backup.adm;Backup;Administrator;Backup Administrator;EF-Standarduser - Backup Administrator;CN=Users;D=dgWa144i12Pw!
-ldapquery;LDAP;Query;LDAP Query Benutzer;EF-Standarduser - LDAP Query Benutzer;CN=Users;D=dgWa144i12Pw!
-idds-ucip.usr;IDDS-UCiP;Touchuser;IDDS-UCiP Touchuser;EF-Standarduser - IDDS-UCiP Benutzer;OU=IDDS-UCiP,OU=Systembenutzer,OU=ILS-Template;D=dgWa144i12Pw!
-sbclient.usr;SB-Client;Touchuser;SB-Client Touchuser;EF-Standarduser - SBClient Benutzer;OU=SB-Client,OU=Systembenutzer,OU=ILS-Template;D=dgWa144i12Pw!
-test.dispo;Test;Dispo;Test Dispo;EF-Standarduser - Testbenutzer mit Disponentenberechtigungen;OU=EF-Test,OU=Disponenten,OU=Systembenutzer,OU=ILS-Template;D=dgWa144i12Pw!
-test.adm;Test;Administrator;Test Administrator;EF-Standarduser - Testbenutzer mit Systemadministartorenberechtigungen;OU=Systemadministratoren;D=dgWa144i12Pw!
-invent.service.adm;Docusnap;Inventarisierung;Docusnap Inventairisierung Administrator;EF-Standarduser - Docusnap Inventairisierung;CN=Users;D=dgWa144i12Pw!
-backup.service.adm;Backup;Service;Backup Service Administrator;EF-Standarduser - Backup User;CN=Users;D=dgWa144i12Pw!
+it-sol.adm;IT-Solutions;Administrator;IT-Solutions Administrator;Company-Defaultuser;OU=Company Administrators;D=dgWa144i12Pw!
+comp-technical.adm;Company-Technical;Administrator;Company-Technical Administrator;Company-Defaultuser;OU=Company Administrators;D=dgWa144i12Pw!
+rescue.adm;Rescue;Administrator;Rescue Administrator;Company-Defaultuser - Rescue Administrator;OU=Company Administrators;D=dgWa144i12Pw!
+techsupp-1st.adm;Technical Support;1st Administrator;Technical Support 1st Administrator;Company-Defaultuser - Technical Support Administrator 1;OU=Company Administrators;D=dgWa144i12Pw!
+techsupp-2nd.adm;Technical Support;2nd Administartor;Technical Support 2nd Administrator;Company-Defaultuser - Technical Support Administrator 2;OU=Company Administrators;D=dgWa144i12Pw!
+dbmgmt.adm;Database Management;Administrator;Database Management Administrator;Company-Defaultuser;OU=Company Administrators;D=dgWa144i12Pw!
+comp.service.adm;Company Service;Administrator;Company Service Administrator;Company-Defaultuser;OU=Company Administrators;D=dgWa144i12Pw!
+test.adm;Test;Administrator;Test Administrator;Company-Defaultuser;OU=Company Administrators;D=dgWa144i12Pw!
+backup.adm;Backup;Administrator;Backup Administrator;Company-Defaultuser - Backup Administrator;CN=Users;D=dgWa144i12Pw!
+ldapquery;LDAP;Query;LDAP Query User;Company-Defaultuser - LDAP Query User;CN=Users;D=dgWa144i12Pw!
+test.user;Test;User;Test USer;Company-Defaultuser - Testuser;OU=Test,OU=Disponenten,OU=Systembenutzer,OU=Company-Template;D=dgWa144i12Pw!
+test.adm;Test;Administrator;Test Administrator;Company-Defaultuser - Testuser;OU=Systemadministrators;D=dgWa144i12Pw!
+backup.service.adm;Backup;Service;Backup Service Administrator;Company-Defaultuser - Backup User;CN=Users;D=dgWa144i12Pw!
