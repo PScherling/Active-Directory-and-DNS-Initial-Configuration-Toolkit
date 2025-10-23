@@ -76,17 +76,17 @@ Designed for reliability, repeatability, and logging, this toolkit enables syste
 |---------|--------------|
 | **1_ad-ou-std-creation_final.ps1** | Creates a standardized OU hierarchy under `CompanyRoot` to maintain a clean and structured AD layout. |
 
-<img width="1024" height="769" alt="image" src="https://github.com/user-attachments/assets/b6621039-e455-4b95-8fac-6d887627bb20" />
+<img width="1023" height="770" alt="image" src="https://github.com/user-attachments/assets/087522be-26ef-49f2-b42d-a0b626242667" />
 
 
 ---
 
-### 3_AD_Gruppen_Import
+### 3_AD_Groups_Import
 | Script | Description |
 |---------|--------------|
 | **1_group-import_final.ps1** | Bulk-imports Active Directory groups from a predefined CSV file. |
 
-<img width="1024" height="769" alt="image" src="https://github.com/user-attachments/assets/dede89dc-8185-458e-bd36-ff6a858a2a84" />
+<img width="1023" height="770" alt="image" src="https://github.com/user-attachments/assets/aa96c1a6-fd1c-472b-a1a7-d20b0c428a1a" />
 
 
 ---
@@ -96,7 +96,7 @@ Designed for reliability, repeatability, and logging, this toolkit enables syste
 |---------|--------------|
 | **1_user-import_final.ps1** | Bulk-imports users into Active Directory with properties such as department, email, and group membership. |
 
-<img width="1024" height="769" alt="image" src="https://github.com/user-attachments/assets/5564dc13-bf02-426c-bfeb-8bd09d2a4718" />
+<img width="1023" height="770" alt="image" src="https://github.com/user-attachments/assets/7b2579d8-2a83-497c-8374-3c2a11c63707" />
 <img width="1024" height="82" alt="image" src="https://github.com/user-attachments/assets/976cf211-1361-4258-b5b4-eec48b6050da" />
 
 
@@ -107,7 +107,7 @@ Designed for reliability, repeatability, and logging, this toolkit enables syste
 |---------|--------------|
 | **1_ad-adduserstogroups_final.ps1** | Automates adding users to security or distribution groups based on input mappings. |
 
-<img width="1024" height="769" alt="image" src="https://github.com/user-attachments/assets/fbfc8ecb-f537-47a5-bf22-f7876d306684" />
+<img width="1023" height="770" alt="image" src="https://github.com/user-attachments/assets/daa0e2a6-e60d-4168-b6dd-22b5e0a7a9d9" />
 
 
 ---
