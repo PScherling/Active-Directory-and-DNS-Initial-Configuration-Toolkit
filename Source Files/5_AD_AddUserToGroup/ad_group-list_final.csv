@@ -1,0 +1,13 @@
+﻿Name;SamAccountName;GroupCategory;GroupScope;OUPath;Members
+Administrators;Administrators;Security;DomainLocal;CN=Builtin;rescue.adm,it.adm
+Domain Admins;Domain Admins;Security;Global;CN=Users;rescue.adm,it.adm,backup.service.adm
+Company-Admins;Company-Admins;Security;Global;OU=Company Administrators;it.adm,comp-technical.adm,rescue.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,comp.service.adm,test.adm
+Enterprise Admins;Enterprise Admins;Security;Universal;CN=Users;it.adm,rescue.adm
+Remote Desktop Users;Remote Desktop Users;Security;DomainLocal;CN=Builtin;comp-technical.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,test.adm
+Remote Management Users;Remote Management Users;Security;DomainLocal;CN=Builtin;comp-technical.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,test.adm
+Group Policy Creator Owners;Group Policy Creator Owners;Security;Global;CN=Users;it.adm,rescue.adm
+Schema Admins;Schema Admins;Security;Universal;CN=Users;it.adm,rescue.adm
+Server Operators;Server Operators;Security;DomainLocal;CN=Builtin;it.adm,comp-technical.adm,rescue.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,comp.service.adm,test.adm
+Backup Operators;Backup Operators;Security;DomainLocal;CN=Builtin;it.adm,rescue.adm
+LAPS-Administrators;LAPS-Administrators;Security;Global;CN=Users;it.adm,rescue.adm
+Backup-User;Backup-User;Security;Global;CN=Users;backup.service.adm
