@@ -1,14 +1,13 @@
 ﻿Name;SamAccountName;GroupCategory;GroupScope;OUPath;Members
-Administratoren;Administratoren;Security;DomainLocal;CN=Builtin;not.adm,it-sol.adm
-Domänen-Admins;Domänen-Adminis;Security;Global;CN=Users;not.adm,it-sol.adm,invent.service.adm
-Eurofunk-Admins;Eurofunk-Admins;Security;Global;OU=Eurofunk Administratoren;it-sol.adm,ef-technik.adm,esc-service.adm,not.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,euro.service.adm,ef-test.adm
-Organisations-Admins;Organisations-Admins;Security;Universal;CN=Users;it-sol.adm,not.adm
-Remotedesktopbenutzer;Remotedesktopbenutzer;Security;DomainLocal;CN=Builtin;ef-technik.adm,esc-service.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,ef-test.adm
-Remoteverwaltungsbenutzer;Remoteverwaltungsbenutzer;Security;DomainLocal;CN=Builtin;ef-technik.adm,esc-service.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,ef-test.adm
-Richtlinien-Ersteller-Besitzer;Richtlinien-Ersteller-Besitzer;Security;Global;CN=Users;it-sol.adm,not.adm
-Schema-Admins;Schema-Admins;Security;Universal;CN=Users;it-sol.adm,not.adm
-Server-Operatoren;Server-Operatoren;Security;DomainLocal;CN=Builtin;it-sol.adm,ef-technik.adm,esc-service.adm,not.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,euro.service.adm,ef-test.adm
-Sicherungs-Operatoren;Sicherungs-Operatoren;Security;DomainLocal;CN=Builtin;it-sol.adm,not.adm
-System-Admins;System-Admins;Security;Global;OU=Systemadministratoren;test.adm
-Docusnap-Benutzer;Docusnap-Benutzer;Security;Global;CN=Users;invent.service.adm
-LAPS-Administratoren;LAPS-Administratoren;Security;Global;CN=Users;it-sol.adm,not.adm
+Administratoren;Administratoren;Security;DomainLocal;CN=Builtin;rescue.adm,it-sol.adm
+Domänen-Admins;Domänen-Adminis;Security;Global;CN=Users;rescue.adm,it-sol.adm,backup.service.adm
+Company-Admins;Company-Admins;Security;Global;OU=Company Administrators;it-sol.adm,comp-technical.adm,rescue.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,comp.service.adm,test.adm
+Organisations-Admins;Organisations-Admins;Security;Universal;CN=Users;it-sol.adm,rescue.adm
+Remotedesktopbenutzer;Remotedesktopbenutzer;Security;DomainLocal;CN=Builtin;comp-technical.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,test.adm
+Remoteverwaltungsbenutzer;Remoteverwaltungsbenutzer;Security;DomainLocal;CN=Builtin;comp-technical.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,test.adm
+Richtlinien-Ersteller-Besitzer;Richtlinien-Ersteller-Besitzer;Security;Global;CN=Users;it-sol.adm,rescue.adm
+Schema-Admins;Schema-Admins;Security;Universal;CN=Users;it-sol.adm,rescue.adm
+Server-Operatoren;Server-Operatoren;Security;DomainLocal;CN=Builtin;it-sol.adm,comp-technical.adm,rescue.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,comp.service.adm,test.adm
+Sicherungs-Operatoren;Sicherungs-Operatoren;Security;DomainLocal;CN=Builtin;it-sol.adm,rescue.adm
+LAPS-Administrators;LAPS-Administrators;Security;Global;CN=Users;it-sol.adm,rescue.adm
+Backup-User;Backup-User;Security;Global;CN=Users;backup.service.adm
