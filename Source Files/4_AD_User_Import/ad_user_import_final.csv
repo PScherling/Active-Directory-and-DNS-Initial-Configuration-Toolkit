@@ -1,0 +1,13 @@
+﻿Username;Firstname;Lastname;Displayname;Description;OUPath;Password
+it.adm;IT;Administrator;IT Administrator;Company-Defaultuser;OU=Company Administrators;Pa$$w0rd!
+comp-technical.adm;Company-Technical;Administrator;Company-Technical Administrator;Company-Defaultuser;OU=Company Administrators;Pa$$w0rd!
+rescue.adm;Rescue;Administrator;Rescue Administrator;Company-Defaultuser - Rescue Administrator;OU=Company Administrators;Pa$$w0rd!
+techsupp-1st.adm;Technical Support;1st Administrator;Technical Support 1st Administrator;Company-Defaultuser - Technical Support Administrator 1;OU=Company Administrators;Pa$$w0rd!
+techsupp-2nd.adm;Technical Support;2nd Administartor;Technical Support 2nd Administrator;Company-Defaultuser - Technical Support Administrator 2;OU=Company Administrators;Pa$$w0rd!
+dbmgmt.adm;Database Management;Administrator;Database Management Administrator;Company-Defaultuser;OU=Company Administrators;Pa$$w0rd!
+comp.service.adm;Company Service;Administrator;Company Service Administrator;Company-Defaultuser;OU=Company Administrators;Pa$$w0rd!
+test.adm;Test;Administrator;Test Administrator;Company-Defaultuser;OU=Company Administrators;Pa$$w0rd!
+backup.adm;Backup;Administrator;Backup Administrator;Company-Defaultuser - Backup Administrator;CN=Users;Pa$$w0rd!
+ldapquery;LDAP;Query;LDAP Query User;Company-Defaultuser - LDAP Query User;CN=Users;Pa$$w0rd!
+test.user;Test;User;Test User;Company-Defaultuser - Testuser;OU=Test,OU=Disponenten,OU=Systembenutzer,OU=Company-Template;Pa$$w0rd!
+backup.service.adm;Backup;Service;Backup Service Administrator;Company-Defaultuser - Backup User;CN=Users;Pa$$w0rd!
