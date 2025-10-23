@@ -1,0 +1,12 @@
+﻿Name;SamAccountName;GroupCategory;GroupScope;DisplayName;OUPath;Description
+AntiViren-Administrators;AntiViren-Administrators;Security;Global;AntiViren-Administrators;CN=Users;Predefined Default Group
+AntiViren-Users;AntiViren-Users;Security;Global;AntiViren-Users;CN=Users;Predefined Default Group
+Backup-Administrators;Backup-Administrators;Security;Global;Backup-Administrators;CN=Users;Predefined Default Group
+Backup-Users;Backup-Users;Security;Global;Backup-Users;CN=Users;Predefined Default Group
+Firewall-Administrators;Firewall-Administrators;Security;Global;Firewall-Administrators;CN=Users;Predefined Default Group
+Firewall-Users;Firewall-Users;Security;Global;Firewall-Users;CN=Users;Predefined Default Group
+Hardware-Administrators;Hardware-Administrators;Security;Global;Hardware-Administrators;CN=Users;Predefined Default Group
+Hardware-Users;Hardware-Users;Security;Global;Hardware-Users;CN=Users;Predefined Default Group
+Company-Admins;Company-Admins;Security;Global;Company-Admins;OU=Company Administrators;Predefined Default Group
+Test-User;Test-User;Security;Global;Test-User;OU=Test,OU=Employee,OU=Systemuser,OU=Company-Template;Predefined Default Group
+LAPS-Administrators;LAPS-Administrators;Security;Global;LAPS-Administrators;CN=Users;Predefined Default Group

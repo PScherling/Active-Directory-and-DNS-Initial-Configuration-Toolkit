@@ -1,0 +1,1 @@
+Bevor die Gruppen importiert werden können, muss die Standardstruktur der OUs vorhanden sein!!!
