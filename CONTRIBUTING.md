@@ -1,6 +1,6 @@
-# Contributing to psc_sconfig
+# Contributing to ADC-Setup
 
-Welcome, and thank you for your interest in contributing to psc_sconfig!
+Welcome, and thank you for your interest in contributing to ADC-setup!
 
 There are many ways in which you can contribute, beyond writing code.
 The goal of this document is to provide a high-level overview of how you can get involved.
@@ -14,7 +14,7 @@ The goal of this document is to provide a high-level overview of how you can get
 Have a question? Rather than opening an issue, please ask a question in [discussions][1].
 Your well-worded question will serve as a resource to others searching for help.
 
-  [1]: https://github.com/PScherling/psc_sconfig/discussions
+  [1]: https://github.com/PScherling/ADC-Setup/discussions
 
 ## Reporting issues
 
@@ -43,7 +43,7 @@ Use a reaction in place of a "+1" comment:
 
 When you are ready to contribute a fix or feature:
 
-- Start by [forking the psc_sconfig repo][github-fork].
+- Start by [forking the adc-setup repo][github-fork].
 - Create a new branch from main in your fork.
 - Add commits in your branch.
   - If you have updated module code also update `CHANGELOG.md`.
@@ -117,4 +117,4 @@ Thank you for taking the time to contribute.
 [github-pr]: https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests
 [github-pr-create]: https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork
 [build]: https://github.com/microsoft/PSRule/blob/main/docs/install-instructions.md#building-from-source
-[issues]: https://github.com/PScherling/psc_sconfig/issues
+[issues]: https://github.com/PScherling/adc-setup/issues
