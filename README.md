@@ -9,7 +9,7 @@ Designed for reliability, repeatability, and logging, this toolkit enables syste
 ### Release Notes
 | Version| Release Date | Title | Description | Features | Bug Fixes | Known Issues |
 |--------------|--------------|--------------|--------------|--------------|--------------|--------------|
-| **0.0.1** | 22/Oct/2025 | Initial Release | Initial Release | See Key-Features below |  |  |
+| **0.0.1** | 22/Oct/2025 | Initial Release | Initial Release | Have a look at the 'Key Features' section |  |  |
 
 
 ---
