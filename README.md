@@ -197,13 +197,12 @@ or on remote log share:
 
 ---
 
-## Author
+## 👤 Author
 
 **Author:** Patrick Scherling  
-**Solution:** Active Directory / DNS Server Initial Configuration  
 **Contact:** @Patrick Scherling  
 
 ---
 
-> Automate. Standardize. Simplify.  
-> This repository is part of Patrick Scherling's IT automation toolset for efficient Windows infrastructure deployment.
+> ⚡ *“Automate. Standardize. Simplify.”*  
+> Part of Patrick Scherling’s IT automation suite for modern Windows Server infrastructure management.
