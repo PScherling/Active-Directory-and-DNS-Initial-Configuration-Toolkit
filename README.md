@@ -4,11 +4,22 @@
 This repository contains a **fully automated PowerShell-based setup framework** for deploying and configuring a complete **Active Directory Domain Controller** with integrated **DNS Server** and post-deployment automation scripts.  
 Designed for reliability, repeatability, and logging, this toolkit enables system administrators to bootstrap an entire Windows Server AD environment from zero, including OU structure, GPOs, users, and groups.
 
+> 💡 This toolkit can be used as a standalone automation suite or as an **add-on for the [PSC-SConfig Menu](https://github.com/PScherling/psc_sconfig)** for seamless system administration.
+
 ### Release Notes
 | Version| Release Date | Title | Description | Features | Bug Fixes | Known Issues |
 |--------------|--------------|--------------|--------------|--------------|--------------|--------------|
 | **0.0.1** | 22/Oct/2025 | Initial Release | Initial Release | See Key-Features below |  |  |
 
+
+---
+
+## 🧩 PSC_SConfig Integration
+For enhanced usability, integrate this repository with **[PSC-SConfig](https://github.com/PScherling/psc_sconfig)**.  
+This allows direct menu-based access to all ADDS configuration and management scripts.
+
+<img width="1024" height="768" alt="image" src="https://github.com/user-attachments/assets/96fcf5a5-a85f-4c19-b796-a14c7d898d47" />
+<img width="1024" height="768" alt="image" src="https://github.com/user-attachments/assets/f2a83d79-e1ad-4e7c-9837-65fbe00ead8b" />
 
 ---
 
@@ -159,13 +170,6 @@ Designed for reliability, repeatability, and logging, this toolkit enables syste
 . 1_AD-bulk-user-export.ps1
 . 1_AD-bulk-user-import.ps1
 ```
-
-
-## psc_sconfig integration
-
-<img width="1024" height="768" alt="image" src="https://github.com/user-attachments/assets/96fcf5a5-a85f-4c19-b796-a14c7d898d47" />
-<img width="1024" height="768" alt="image" src="https://github.com/user-attachments/assets/f2a83d79-e1ad-4e7c-9837-65fbe00ead8b" />
-
 
 ---
 
