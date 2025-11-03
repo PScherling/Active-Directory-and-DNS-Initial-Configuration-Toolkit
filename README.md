@@ -1,6 +1,6 @@
 # Active Directory / DNS Server Initial Configuration
 
-## Overview
+## 📖 Overview
 This repository contains a **fully automated PowerShell-based setup framework** for deploying and configuring a complete **Active Directory Domain Controller** with integrated **DNS Server** and post-deployment automation scripts.  
 Designed for reliability, repeatability, and logging, this toolkit enables system administrators to bootstrap an entire Windows Server AD environment from zero, including OU structure, GPOs, users, and groups.
 
@@ -17,7 +17,7 @@ This allows direct menu-based access to all ADDS configuration and management sc
 
 ---
 
-## Key Features
+## ✨ Key Features
 - Automated Active Directory and DNS configuration
 - Domain setup and post-installation routines
 - Automated creation of Organizational Units (OU) and GPO linking
@@ -29,7 +29,7 @@ This allows direct menu-based access to all ADDS configuration and management sc
 
 ---
 
-## System Requirements
+## ⚙️ System Requirements
 
 | Requirement | Minimum |
 |--------------|----------|
@@ -41,13 +41,13 @@ This allows direct menu-based access to all ADDS configuration and management sc
 
 ---
 
-## Network Configuration
+## 🖥️ Network Configuration
 - Static-IP Adress
 - DNS: 127.0.0.1, [Static-IP-Adress]
 
 ---
 
-## Folder & Script Structure
+## 📁 Folder & Script Structure
 
 ### 0_DNS_AD_Initial_Setup
 | Script | Description |
@@ -135,7 +135,7 @@ This allows direct menu-based access to all ADDS configuration and management sc
 
 ---
 
-## Execution Order
+## 🚀 Execution Order
 
 1 **DNS and Domain Setup**
 ```powershell
@@ -167,7 +167,7 @@ This allows direct menu-based access to all ADDS configuration and management sc
 
 ---
 
-## Logging
+## 🧾 Logging
 
 All scripts include a built-in logging mechanism that records:
 - Execution time and hostname
@@ -185,7 +185,7 @@ or on remote log share:
 
 ---
 
-## Notes & Best Practices
+## 💡 Notes & Best Practices
 - Always execute PowerShell with **Administrator privileges**
 - Verify **network and DNS connectivity** before promotion
 - Customize CSVs before importing groups or users
