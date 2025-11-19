@@ -1,6 +1,6 @@
-﻿Name;SamAccountName;GroupCategory;GroupScope;OUPath;Members
+Name;SamAccountName;GroupCategory;GroupScope;OUPath;Members
 Administratoren;Administratoren;Security;DomainLocal;CN=Builtin;rescue.adm,it-sol.adm
-Domänen-Admins;Domänen-Adminis;Security;Global;CN=Users;rescue.adm,it-sol.adm,backup.service.adm
+Domänen-Admins;Domänen-Admins;Security;Global;CN=Users;rescue.adm,it-sol.adm,backup.service.adm
 Company-Admins;Company-Admins;Security;Global;OU=Company Administrators;it-sol.adm,comp-technical.adm,rescue.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,comp.service.adm,test.adm
 Organisations-Admins;Organisations-Admins;Security;Universal;CN=Users;it-sol.adm,rescue.adm
 Remotedesktopbenutzer;Remotedesktopbenutzer;Security;DomainLocal;CN=Builtin;comp-technical.adm,techsupp-1st.adm,techsupp-2nd.adm,dbmgmt.adm,test.adm
@@ -11,3 +11,4 @@ Server-Operatoren;Server-Operatoren;Security;DomainLocal;CN=Builtin;it-sol.adm,c
 Sicherungs-Operatoren;Sicherungs-Operatoren;Security;DomainLocal;CN=Builtin;it-sol.adm,rescue.adm
 LAPS-Administrators;LAPS-Administrators;Security;Global;CN=Users;it-sol.adm,rescue.adm
 Backup-User;Backup-User;Security;Global;CN=Users;backup.service.adm
+Konten-Operatoren;Konten-Operatoren;Security;DomainLocal;CN=Builtin;Company-Admins
