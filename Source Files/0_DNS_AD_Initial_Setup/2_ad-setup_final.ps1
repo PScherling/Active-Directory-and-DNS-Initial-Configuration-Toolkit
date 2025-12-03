@@ -96,7 +96,7 @@ function AD-Setup {
 	$response = ""
 	$securityresponse = ""
 	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\ad-setup.log"
+    $logFile = "C:\_psc\ADC_Setup\Logfiles\ad-setup.log"
 	
 	# Function to log messages with timestamps
     function Write-Log {
@@ -225,3 +225,4 @@ function AD-Setup {
 
 
 AD-Setup
+
