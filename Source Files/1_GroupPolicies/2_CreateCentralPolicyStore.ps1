@@ -21,7 +21,7 @@
     - Copies all `.admx` and `.adml` files (including hidden/system files) recursively
     - Logs every step, including errors and file operations, to a persistent log file:
       ```
-      C:\_it\ADC_Setup\Logfiles\CreateCentralPolicyStore.log
+      C:\_psc\ADC_Setup\Logfiles\CreateCentralPolicyStore.log
       ```
 
     This script is intended to be executed **after Active Directory and SYSVOL are fully initialized**, 
@@ -59,7 +59,7 @@
 .Example
 	PS> .\2_CreateCentralPolicyStore.ps1
     Creates the Central Policy Store by copying the contents of 
-    `C:\_it\ADC_Setup\1_GroupPolicies\PolicyDefinitions` 
+    `C:\_psc\ADC_Setup\1_GroupPolicies\PolicyDefinitions` 
     to the SYSVOL location of the current domain.
 
     PS> powershell.exe -ExecutionPolicy Bypass -File "C:\Scripts\2_CreateCentralPolicyStore.ps1"
@@ -70,7 +70,7 @@
 function Create-CentralPolicyStore {
 
 	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\CreateCentralPolicyStore.log"
+    $logFile = "C:\_psc\ADC_Setup\Logfiles\CreateCentralPolicyStore.log"
 	
 	# Function to log messages with timestamps
     function Write-Log {
@@ -87,7 +87,7 @@ function Create-CentralPolicyStore {
     Write-Log " Starting configuration process..."
 	
 	# Define the source and destination paths
-	$SourcePath = "C:\_it\ADC_Setup\1_GroupPolicies\PolicyDefinitions"
+	$SourcePath = "C:\_psc\ADC_Setup\1_GroupPolicies\PolicyDefinitions"
 	Write-Log " Source Path is: $SourcePath"
 	
 	try{
@@ -208,3 +208,4 @@ function Create-CentralPolicyStore {
 
 
 Create-CentralPolicyStore
+
