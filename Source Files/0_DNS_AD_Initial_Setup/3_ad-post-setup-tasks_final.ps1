@@ -15,7 +15,7 @@
     The script supports interactive selection or batch execution of all tasks and logs every action performed
     to a persistent log file:
     ```
-    C:\_it\ADC_Setup\Logfiles\ad-post-setup-tasks.log
+    C:\_psc\ADC_Setup\Logfiles\ad-post-setup-tasks.log
     ```
 
     Each operation is validated for errors and reattempted in case of transient failures.  
@@ -63,7 +63,7 @@
 
 function Post-AD-Setup {
 	# Log file path
-	$logFile = "C:\_it\ADC_Setup\Logfiles\ad-post-setup-tasks.log"
+	$logFile = "C:\_psc\ADC_Setup\Logfiles\ad-post-setup-tasks.log"
 	
 	# Function to log messages with timestamps
     function Write-Log {
@@ -273,3 +273,4 @@ function Post-AD-Setup {
 
 
 Post-AD-Setup
+
