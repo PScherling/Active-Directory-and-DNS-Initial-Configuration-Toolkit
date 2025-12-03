@@ -10,7 +10,7 @@
     The script performs the following actions:
     - Reads GPO-to-OU link definitions from a CSV file:
       ```
-      C:\_it\ADC_Setup\6_AD_OU-GPO-Link_Import\ad_ou-gpo-link_import_final.csv
+      C:\_psc\ADC_Setup\6_AD_OU-GPO-Link_Import\ad_ou-gpo-link_import_final.csv
       ```
     - Validates that the Active Directory domain and the target OUs exist
     - Verifies that each specified GPO exists before attempting to link it
@@ -23,7 +23,7 @@
 
     All operations are logged to:
     ```
-    C:\_it\ADC_Setup\Logfiles\LinkGPOToOU.log
+    C:\_psc\ADC_Setup\Logfiles\LinkGPOToOU.log
     ```
 
 	Requirements:
@@ -71,7 +71,7 @@
 function Link-GPOtoOU {
 
 	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\LinkGPOToOU.log"
+    $logFile = "C:\_psc\ADC_Setup\Logfiles\LinkGPOToOU.log"
 	
 	# Function to log messages with timestamps
     function Write-Log {
@@ -91,7 +91,7 @@ function Link-GPOtoOU {
     #Import-Module activedirectory
   
     #Store the data from ADUsers.csv in the $ADUsers variable
-    $ImportOUGPOLinks = Import-csv -path 'C:\_it\ADC_Setup\6_AD_OU-GPO-Link_Import\ad_ou-gpo-link_import_final.csv' -Delimiter ";" -encoding utf8 # Standardpfad
+    $ImportOUGPOLinks = Import-csv -path 'C:\_psc\ADC_Setup\6_AD_OU-GPO-Link_Import\ad_ou-gpo-link_import_final.csv' -Delimiter ";" -encoding utf8 # Standardpfad
 
     $response = ""
     $Domain = ""
@@ -245,3 +245,4 @@ function Link-GPOtoOU {
 
 
 Link-GPOtoOU
+
