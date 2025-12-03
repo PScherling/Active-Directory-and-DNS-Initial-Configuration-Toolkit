@@ -11,7 +11,7 @@
     The script:
     - Reads group definitions from a CSV file located at:
       ```
-      C:\_it\ADC_Setup\3_AD_Gruppen_Import\ad_group_import_final.csv
+      C:\_psc\ADC_Setup\3_AD_Gruppen_Import\ad_group_import_final.csv
       ```
     - Retrieves and validates the current Active Directory domain context
     - Checks whether each group already exists in AD before creating it
@@ -27,7 +27,7 @@
 
     All operations are logged to:
     ```
-    C:\_it\ADC_Setup\Logfiles\Import-ADGroups.log
+    C:\_psc\ADC_Setup\Logfiles\Import-ADGroups.log
     ```
 
     This script is typically used during Active Directory initialization or re-deployment 
@@ -74,7 +74,7 @@
 function Import-ADGroups {
 
 	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\Import-ADGroups.log"
+    $logFile = "C:\_psc\ADC_Setup\Logfiles\Import-ADGroups.log"
 	
 	# Function to log messages with timestamps
     function Write-Log {
@@ -95,7 +95,7 @@ function Import-ADGroups {
 	#Import-Module activedirectory
 	  
 	#Store the data from ADUsers.csv in the $ADUsers variable
-	$ImportADGroups = Import-csv -path 'C:\_it\ADC_Setup\3_AD_Gruppen_Import\ad_group_import_final.csv' -Delimiter ";" -encoding utf8 # Standardpfad
+	$ImportADGroups = Import-csv -path 'C:\_psc\ADC_Setup\3_AD_Gruppen_Import\ad_group_import_final.csv' -Delimiter ";" -encoding utf8 # Standardpfad
 	$response = ""
 	$Domain = ""
 	$DomainName = ""
@@ -254,4 +254,5 @@ function Import-ADGroups {
 
 
 Import-ADGroups
+
 
