@@ -1,4 +1,0 @@
-Zuerst das Skript für die DNS Konfirguration (1_ef-ad-dns....ps1) ausführen.
-Danach das Skript für das AD Setup (2_ef-ad-setup...ps1).
-Danach das Skript für Post Setup Tasks (3_ef-ad...ps1).
-Das Skript 4 darf nur ausgeführt werden, wenn ein weiterer DC in eine bestehende Domäne integriert werden soll
