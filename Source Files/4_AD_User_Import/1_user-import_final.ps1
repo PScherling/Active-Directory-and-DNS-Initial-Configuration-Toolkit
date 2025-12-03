@@ -11,7 +11,7 @@
     The script performs the following actions:
     - Loads a CSV file containing user account details from:
       ```
-      C:\_it\ADC_Setup\4_AD_User_Import\ad_user_import_final.csv
+      C:\_psc\ADC_Setup\4_AD_User_Import\ad_user_import_final.csv
       ```
     - Retrieves and validates the Active Directory domain context  
     - Checks for existing users before attempting creation to avoid duplicates  
@@ -28,7 +28,7 @@
 
     The script logs all operations to:
     ```
-    C:\_it\ADC_Setup\Logfiles\Import-ADUsers.log
+    C:\_psc\ADC_Setup\Logfiles\Import-ADUsers.log
     ```
 
     It is typically executed after the OU and group structure have been deployed, 
@@ -76,7 +76,7 @@
 function Import-ADUsers {
 
 	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\Import-ADUsers.log"
+    $logFile = "C:\_psc\ADC_Setup\Logfiles\Import-ADUsers.log"
 	
 	# Function to log messages with timestamps
     function Write-Log {
@@ -96,7 +96,7 @@ function Import-ADUsers {
 	#Import-Module activedirectory
 	  
 	#Store the data from ADUsers.csv in the $ADUsers variable
-	$ImportADUsers = Import-csv -path 'C:\_it\ADC_Setup\4_AD_User_Import\ad_user_import_final.csv' -Delimiter ";" -encoding utf8 # Standardpfad
+	$ImportADUsers = Import-csv -path 'C:\_psc\ADC_Setup\4_AD_User_Import\ad_user_import_final.csv' -Delimiter ";" -encoding utf8 # Standardpfad
 	$response = ""
 	$Domain = ""
 	$DomainName = ""
@@ -302,3 +302,4 @@ function Import-ADUsers {
 
 
 Import-ADUsers
+
