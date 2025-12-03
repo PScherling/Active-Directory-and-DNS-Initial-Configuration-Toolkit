@@ -317,17 +317,6 @@ function EF-Import-ADUsers {
     try{
         #Input for Domain Name
         while([string]::IsNullOrEmpty($DomainName)) {
-			<#Write-Host -ForegroundColor Red "
-	   .-://///:-.
-	 -://:-...-//   .       
-	-///-         ///       EEEEEEE UU   UU RRRRRR   OOOOO  FFFFFFF UU   UU NN   NN KK  KK
-	///:         :///       EE      UU   UU RR   RR OO   OO FF      UU   UU NNN  NN KK KK
-	///:         :///       EEEEE   UU   UU RRRRRR  OO   OO FFFF    UU   UU NN N NN KKKK
-	-///-       -///-       EE      UU   UU RR  RR  OO   OO FF      UU   UU NN  NNN KK KK
-	 -://:-...-://:-        EEEEEEE  UUUUU  RR   RR  OOOO0  FF       UUUUU  NN   NN KK  KK
-	   *-://///:-*
-"#>
-
             Write-Host "-----------------------------------------------------------------------------------"
 			Write-Host "              Active Directory Management"
 			Write-Host "              AD User Import"
@@ -831,3 +820,4 @@ function EF-Import-ADUsers {
 
 
 EF-Import-ADUsers
+
