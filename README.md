@@ -176,7 +176,7 @@ All scripts include a built-in logging mechanism that records:
 
 Default log directory:
 ```
-C:\_it\Logs\
+C:\_psc\Logs\
 ```
 or on remote log share:
 ```
