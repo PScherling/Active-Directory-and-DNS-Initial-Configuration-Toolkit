@@ -60,7 +60,7 @@
 
 function Add-DC {
 	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\ad-setup_add-dc.log"
+    $logFile = "C:\_psc\ADC_Setup\Logfiles\ad-setup_add-dc.log"
 	
 	# Function to log messages with timestamps
     function Write-Log {
@@ -226,3 +226,4 @@ function Add-DC {
 
 
 Add-DC
+
