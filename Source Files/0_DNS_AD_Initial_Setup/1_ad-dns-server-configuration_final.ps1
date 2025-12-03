@@ -14,7 +14,7 @@
 
     The script is fully interactive and logs all operations to:
     ```
-    C:\_it\ADC_Setup\Logfiles\ad-dns-server-configuration.log
+    C:\_psc\ADC_Setup\Logfiles\ad-dns-server-configuration.log
     ```
 
     Each major action (e.g., DNS zone creation, IPv6 disabling, static record setup) is recorded 
@@ -92,7 +92,7 @@ function DNS-Configuration {
 	$IsIPv6Disabled = ""
 	$ArrayOfPrefixes = @(1..32)
 	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\ad-dns-server-configuration.log"
+    $logFile = "C:\_psc\ADC_Setup\Logfiles\ad-dns-server-configuration.log"
 	
 	# Function to log messages with timestamps
     function Write-Log {
@@ -313,3 +313,4 @@ function DNS-Configuration {
 
 
 DNS-Configuration
+
