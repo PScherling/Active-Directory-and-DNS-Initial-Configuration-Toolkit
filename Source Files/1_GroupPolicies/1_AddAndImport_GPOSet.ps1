@@ -52,7 +52,7 @@
     Executes the script automatically during post-domain deployment, restoring all GPOs from backup.
 #>
 
-function Import-GPO-Set {
+function Import-GPOSet {
 	# Log file path
     $logFile = "C:\_it\ADC_Setup\Logfiles\AddAndImport_GPOSet.log"
 	
@@ -80,7 +80,7 @@ function Import-GPO-Set {
 		#Nothing to do
 		Write-Log " Location is correct."
 	}
-	$gpofolder = "EF_GPOSet_latest"
+	$gpofolder = "GPOSet_latest"
 	$xmlname = "manifest.xml"
 	
 	Write-Log " Get-Location is: $location"
@@ -159,4 +159,5 @@ function Import-GPO-Set {
 }
 
 
-Import-GPO-Set
+Import-GPOSet
+
