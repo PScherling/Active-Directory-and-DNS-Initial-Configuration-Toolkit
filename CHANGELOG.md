@@ -1,6 +1,6 @@
 # Change Log
 ## Current Release
-Version 0.0.1
+Version 0.0.2
 
 ## Release Notes
 | Version| Release Date | Title | Description | Features | Bug Fixes | Known Issues |
