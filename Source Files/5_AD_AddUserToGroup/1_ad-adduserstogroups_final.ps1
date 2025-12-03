@@ -12,8 +12,8 @@
     - Detects the system language using `Get-ComputerInfo`
     - Imports group membership definitions from:
       ```
-      English (en-US): C:\_it\ADC_Setup\5_AD_AddUserToGroup\ad_group-list_final.csv
-      German (de-DE):  C:\_it\ADC_Setup\5_AD_AddUserToGroup\de-DE\ad_group-list_de_final.csv
+      English (en-US): C:\_psc\ADC_Setup\5_AD_AddUserToGroup\ad_group-list_final.csv
+      German (de-DE):  C:\_psc\ADC_Setup\5_AD_AddUserToGroup\de-DE\ad_group-list_de_final.csv
       ```
     - Validates the Active Directory domain configuration before execution  
     - Iterates through each group listed in the CSV file and:
@@ -25,11 +25,11 @@
     The script logs operations to:
     - For English systems:
       ```
-      C:\_it\ADC_Setup\Logfiles\AddUsersToGroups.log
+      C:\_psc\ADC_Setup\Logfiles\AddUsersToGroups.log
       ```
     - For German systems:
       ```
-      C:\_it\ADC_Setup\Logfiles\AddUsersToGroups_DE.log
+      C:\_psc\ADC_Setup\Logfiles\AddUsersToGroups_DE.log
       ```
 
     This script is typically executed **after the OU, group, and user import processes** have been completed,
@@ -84,8 +84,8 @@
 # ===============================
 $Localization = @{
     'en-US' = @{
-        CsvPath       = 'C:\_it\ADC_Setup\5_AD_AddUserToGroup\ad_group-list_final.csv'
-        LogFile       = 'C:\_it\ADC_Setup\Logfiles\AddUsersToGroups.log'
+        CsvPath       = 'C:\_psc\ADC_Setup\5_AD_AddUserToGroup\ad_group-list_final.csv'
+        LogFile       = 'C:\_psc\ADC_Setup\Logfiles\AddUsersToGroups.log'
         Header        = "-----------------------------------------------------------------------------------
               Active Directory Configuration Setup
               Adding Users to Groups
@@ -94,8 +94,8 @@ $Localization = @{
     }
 
     'de-DE' = @{
-        CsvPath       = 'C:\_it\ADC_Setup\5_AD_AddUserToGroup\de-DE\ad_group-list_de_final.csv'
-        LogFile       = 'C:\_it\ADC_Setup\Logfiles\AddUsersToGroups_DE.log'
+        CsvPath       = 'C:\_psc\ADC_Setup\5_AD_AddUserToGroup\de-DE\ad_group-list_de_final.csv'
+        LogFile       = 'C:\_psc\ADC_Setup\Logfiles\AddUsersToGroups_DE.log'
         Header        = "-----------------------------------------------------------------------------------
               Active Directory Configuration Setup
               Adding Users to Groups (German Edition)
@@ -281,4 +281,5 @@ Reason: $_"
 $Cfg = Get-OSLanguageConfig
 
 Add-UsersToGroups -CsvPath $Cfg.CsvPath -LogFilePath $Cfg.LogFile -HeaderText $Cfg.Header
+
 
