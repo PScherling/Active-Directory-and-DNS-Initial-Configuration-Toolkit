@@ -6,3 +6,4 @@ Version 0.0.1
 | Version| Release Date | Title | Description | Features | Bug Fixes | Known Issues |
 |--------------|--------------|--------------|--------------|--------------|--------------|--------------|
 | **0.0.1** | 22/Oct/2025 | Initial Release | Initial Release | Have a look at the 'Key Features' section |  |  |
+| **0.0.2** | 03/Dec/2025 | Initial Release | Initial Release | Adapting **5_AddUsersToGroups** |  |  |
