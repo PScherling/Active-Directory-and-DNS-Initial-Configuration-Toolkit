@@ -1,2 +1,0 @@
-Bevor die GPOs zu den OUs verlinkt werden können, muss folgende Anleitung vorher durchgearbeitet werden:
-https://confluence.eurofunk.com/display/ITINFRACUST/Active+Directory+-+Standard+GPOs+Windows+LTSC21
