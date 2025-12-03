@@ -14,11 +14,11 @@
     - Export detailed user properties to a UTF-8 encoded CSV file
     - Save the export file to a user-defined or default location:
       ```
-      C:\_it\<DomainName>_<OUName>_ad-user-export.csv
+      C:\_psc\<DomainName>_<OUName>_ad-user-export.csv
       ```
     - Log all operations, errors, and user actions to:
       ```
-      C:\_it\ADC_Setup\Logfiles\Export-ADUsers.log
+      C:\_psc\ADC_Setup\Logfiles\Export-ADUsers.log
       ```
 
     The exported file can be used for:
@@ -89,7 +89,7 @@
 function EF-Export-ADUsers {
     Clear-Host
 	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\Export-ADUsers.log"
+    $logFile = "C:\_psc\ADC_Setup\Logfiles\Export-ADUsers.log"
 	
 	# CSV Export Path
 	$ExportPath = ""
@@ -358,7 +358,7 @@ function EF-Export-ADUsers {
         Write-Host `n "-----------------------------------------------"
         do {
             Write-Host "`n Please enter the path to export the CSV file or press enter to use default location."
-            $ExportPath = Read-Host " (Default: C:\_it\$($DomainName)_$($selectedOUName)_ad-user-export.csv)"
+            $ExportPath = Read-Host " (Default: C:\_psc\$($DomainName)_$($selectedOUName)_ad-user-export.csv)"
             Write-Log " User Input for Export Path: $ExportPath"
 
             # Check if input is empty
@@ -366,7 +366,7 @@ function EF-Export-ADUsers {
                 #Write-Host -ForegroundColor Yellow " Export path cannot be empty."
                 #Write-Log " WARNING: Export path can not be empty!"
                 #continue
-				$ExportPath = "C:\_it\$($DomainName)_$($selectedOUName)_ad-user-export.csv"
+				$ExportPath = "C:\_psc\$($DomainName)_$($selectedOUName)_ad-user-export.csv"
 				Write-Host -ForegroundColor Yellow " Path for export is '$ExportPath'"
 				Write-Log " Path for export is '$ExportPath'"
             }
@@ -437,4 +437,5 @@ function EF-Export-ADUsers {
 
 
 EF-Export-ADUsers
+
 
