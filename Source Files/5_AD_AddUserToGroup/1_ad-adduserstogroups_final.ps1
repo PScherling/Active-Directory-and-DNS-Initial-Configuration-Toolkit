@@ -96,7 +96,10 @@ $Localization = @{
     'de-DE' = @{
         CsvPath       = 'C:\_it\ADC_Setup\5_AD_AddUserToGroup\de-DE\ad_group-list_de_final.csv'
         LogFile       = 'C:\_it\ADC_Setup\Logfiles\AddUsersToGroups_DE.log'
-        Header        = "Active Directory Setup`nAdding Users to Groups`n(Deutsche Edition)"
+        Header        = "-----------------------------------------------------------------------------------
+              Active Directory Configuration Setup
+              Adding Users to Groups (German Edition)
+-----------------------------------------------------------------------------------`n"
         LangName      = "German"
     }
 }
@@ -278,3 +281,4 @@ Reason: $_"
 $Cfg = Get-OSLanguageConfig
 
 Add-UsersToGroups -CsvPath $Cfg.CsvPath -LogFilePath $Cfg.LogFile -HeaderText $Cfg.Header
+
