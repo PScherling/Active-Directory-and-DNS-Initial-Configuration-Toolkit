@@ -58,11 +58,13 @@
           Contact: @Patrick Scherling
           Primary: @Patrick Scherling
           Created: 2025-01-07
-          Modified: 2025-01-07
+          Modified: 2025-12-03
 
           Version - 0.0.1 - () - Finalized functional version 1.
           Version - 0.0.2 - () - Reworked and little additions.
 		  Version - 0.0.3 - () - Integrating "DE" Version
+		  Version - 0.0.4 - () - Adding group membership fucntionality
+		  Version - 0.0.5 - () - Refactoring to get rid of duplicated logic, multi-lang support, cleaner console output, easier maintanance
 
           TODO:
 		  
@@ -77,355 +79,202 @@
     assigning users to their respective AD groups based on the import file.
 #>
 
-function Check-OSLanguage {
-	$OSLanguage = Get-ComputerInfo | Select-Object OSLanguage
-	$Lang = $OSLanguage.OSLanguage
-	
-	if($Lang -eq "en-US") {
-		Add-UsersToGroups
-	}
-	elseif($Lang -eq "de-DE") {
-		Add-UsersToGroups-DE
-	}
-	else{
-		Write-Host -ForegroundColor Red " ERROR: No valid OS Language found. Your installed OS Language is $Lang"
-		Read-Host -Prompt " Press any key"
-	}
-	
+# ===============================
+# 1. Localization / Configuration
+# ===============================
+$Localization = @{
+    'en-US' = @{
+        CsvPath       = 'C:\_it\ADC_Setup\5_AD_AddUserToGroup\ad_group-list_final.csv'
+        LogFile       = 'C:\_it\ADC_Setup\Logfiles\AddUsersToGroups.log'
+        Header        = "-----------------------------------------------------------------------------------
+              Active Directory Configuration Setup
+              Adding Users to Groups
+-----------------------------------------------------------------------------------`n"
+        LangName      = "English"
+    }
+
+    'de-DE' = @{
+        CsvPath       = 'C:\_it\ADC_Setup\5_AD_AddUserToGroup\de-DE\ad_group-list_de_final.csv'
+        LogFile       = 'C:\_it\ADC_Setup\Logfiles\AddUsersToGroups_DE.log'
+        Header        = "Active Directory Setup`nAdding Users to Groups`n(Deutsche Edition)"
+        LangName      = "German"
+    }
+}
+# Default fallback if an unsupported language is detected
+$DefaultLanguage = 'en-US'
+
+
+# ===============================
+# 2. Logging Function
+# ===============================
+
+function Write-Log {
+	param (
+		[string]$Message
+	)
+	$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+	$logMessage = "[$timestamp] $Message"
+	#Write-Output $logMessage
+	$logMessage | Out-File -FilePath $logFile -Append
 }
 
+
+# ===============================
+# 3. Language Selection
+# ===============================
+function Get-OSLanguageConfig {
+
+    $Lang = (Get-ComputerInfo).OSLanguage
+
+    if ($Localization.ContainsKey($Lang)) {
+        return $Localization[$Lang]
+    }
+
+    Write-Host "Unsupported OS language detected: $Lang" -ForegroundColor Yellow
+    Write-Host "Falling back to $DefaultLanguage." -ForegroundColor Yellow
+    return $Localization[$DefaultLanguage]
+}
+
+# ===============================
+# 4. Core Logic (Universal)
+# ===============================
 function Add-UsersToGroups {
+    param(
+        [string]$CsvPath,
+        [string]$LogFilePath,
+        [string]$HeaderText
+    )
 
-	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\AddUsersToGroups.log"
-	
-	# Function to log messages with timestamps
-    function Write-Log {
-        param (
-            [string]$Message
-        )
-        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-        $logMessage = "[$timestamp] $Message"
-        #Write-Output $logMessage
-        $logMessage | Out-File -FilePath $logFile -Append
+    # Make log file globally available to Write-Log
+    $script:LogFile = $LogFilePath
+
+    Write-Log "=== Starting AD Group Assignment Process ==="
+    Write-Host $HeaderText
+
+    # Validate AD domain
+    Write-Log "Checking AD Domain"
+    <#
+	try {
+        $Domain = Get-ADDomain
     }
-    
-    # Start logging
-    Write-Log " Starting configuration process..."
+    catch {
+        Write-Log "ERROR: No AD Domain detected. Cannot continue. $_"
+        Write-Host "ERROR: No AD Domain detected - aborting." -ForegroundColor Red
+        exit
+    }
 
-	#Import active directory module for running AD cmdlets
-	#Import-Module activedirectory
-	  
-	#Store the data from ADUsers.csv in the $ADUsers variable
-	$ImportADGroups = Import-csv -path 'C:\_it\ADC_Setup\5_AD_AddUserToGroup\ad_group-list_final.csv' -Delimiter ";" #-Encoding utf8 # Standardpfad
-	$response = ""
-	$Domain = ""
-	$DomainName = ""
-	$DomainDistinguishedName = ""
-	$User = ""
-	#$usercreated = "false"
-
-	try{
-
-		#Input for Domain Name
-		while([string]::IsNullOrEmpty($DomainName)) {
-			Write-Host "-----------------------------------------------------------------------------------"
-			Write-Host "              Active Directory Configuration Setup"
-			Write-Host "              Adding Users to Groups"
-			Write-Host "-----------------------------------------------------------------------------------" `n
-
-			#Checking if a domain was set-up in the first place before running the script
-			try {
-				Write-Log " Try to get AD-Domain"
-				$Domain = get-addomain
-			}
-			catch {
-				Write-Log " ERROR: AD-Domain could not be found! There is no Domain existing in your system. You have to set up the Domain Controller first
-		Reason: $_"
-				Write-Host -ForegroundColor Red " ERROR: AD-Domain could not be found! There is no Domain existing in your system. You have to set up the Domain Controller first
-		Reason: $_"
+    Write-Host "Detected Domain:" $Domain.DNSRoot -ForegroundColor Green
+    Write-Log  "Detected Domain: $($Domain.DNSRoot)"
+	#>
+	
+	#Input for Domain Name
+	while([string]::IsNullOrEmpty($DomainName)) {
+				
+		#Checking if a domain was set-up in the first place before running the script
+		try {
+			Write-Log "Try to get AD-Domain"
+			$Domain = get-addomain
+		}
+		catch {
+			Write-Log " ERROR: AD-Domain could not be found! There is no Domain existing in your system. You have to set up the Domain Controller first
+Reason: $_"
+			Write-Host -ForegroundColor Red "ERROR: AD-Domain could not be found! There is no Domain existing in your system. You have to set up the Domain Controller first
+Reason: $_"
+			exit
+		}
+		
+		Write-Host " This is your Domain for this Setup"
+		Write-Host "-----------------------------------------------"
+		$DomainName = $Domain.DNSRoot
+		$DomainDistinguishedName = $Domain.DistinguishedName
+		Write-Host " The Domain Name is:" $DomainName -ForegroundColor Green
+		Write-Host " The Domain Distinguished-Name is:" $DomainDistinguishedName -ForegroundColor Green
+		Write-Host "-----------------------------------------------"
+		
+		Write-Log " This is your Domain for this Setup"
+		Write-Log "-----------------------------------------------"
+		Write-Log " The Domain Name is: $DomainName"
+		Write-Log " The Domain Distinguished-Name is: $DomainDistinguishedName"
+		Write-Log "-----------------------------------------------"
+		
+		while($response -ne "y") {
+			Write-Log " Waiting for user input"
+			$response = Read-Host -Prompt "Press (y) to approve and continue or (a) to abort"
+			if($response -eq "a") {
+				Write-Log " User input was (a) to abort."
 				exit
 			}
-			
-			Write-Host " This is your Domain for this Setup"
-			Write-Host "-----------------------------------------------"
-			$DomainName = $Domain.DNSRoot
-			$DomainDistinguishedName = $Domain.DistinguishedName
-			Write-Host " The Domain Name is:" $DomainName -ForegroundColor Green
-			Write-Host " The Domain Distinguished-Name is:" $DomainDistinguishedName -ForegroundColor Green
-			Write-Host "-----------------------------------------------"
-			
-			Write-Log " This is your Domain for this Setup"
-			Write-Log "-----------------------------------------------"
-			Write-Log " The Domain Name is: $DomainName"
-			Write-Log " The Domain Distinguished-Name is: $DomainDistinguishedName"
-			Write-Log "-----------------------------------------------"
-			
-			while($response -ne "y") {
-				Write-Log " Waiting for user input"
-				$response = Read-Host -Prompt "Press (y) to approve and continue or (a) to abort"
-				if($response -eq "a") {
-					Write-Log " User input was (a) to abort."
-					exit
-				}
-			}
-			Read-Host -Prompt "Press any key to continue for safety reasons"
 		}
-
-		#Loop through each row containing user details in the CSV file
-		Write-Log " Adding AD Users to AD Groups"
-		foreach ($Group in $ImportADGroups)
-		{
-			#Read user data from each field in each row and assign the data to a variable as below
-			$GroupName = $Group.Name # Gruppenname	
-			$SamAccountNames = $Group.Members #Usernames
-			$GroupMembersArray = $SamAccountNames.Split(',')
-			
-
-			#Read-Host -Prompt "Press any key to continue to check if user exists in AD" # Enable for Debugging
-
-			#Check to see if the user already exists in AD
-			
-			foreach ($User in $GroupMembersArray)
-			{
-				$User = $User.ToString()     
-				Write-Log " Check to see if the user already exists in AD"
-				if (Get-ADUser -F {SamAccountName -eq $User})
-				{
-					#User exist then proceed to put in groups
-					#If user exist
-					Write-Log " A user account with username $User exists in Active Directory."
-					Write-Host -ForegroundColor Green " A user account with username $User exists in Active Directory." `n		
-				
-					$usercreated = "true"
-					
-					Write-Log " User who will be added to Group $Groupname - $User"
-					Write-Host " User who will be added to Group "$Groupname": " $User
-		  
-					#Read-Host -Prompt "Press any key to add user to the group" # Enable for Debugging
-
-					$Members = Get-ADGroupMember -Identity $GroupName -Recursive | Select -ExpandProperty SamAccountName
-					Write-Log " Check to see if the user already is member of group"
-					if($Members -contains $User)
-					{
-						#Is member so do nothing.
-						Write-Log " There is nothing to do! User is already member of group $GroupName"
-						Write-Host -ForegroundColor Yellow " There is nothing to do! User is already member of group $GroupName" `n
-			
-					}
-					else
-					{
-						#Is not member so add user.
-						Write-Log " User is not member of group $GroupName"
-						Write-Log " Adding User..."
-						
-						Write-Host " User is not member of group $GroupName"
-						Write-Host " Adding User..." `n
-						
-						try{
-							Add-ADGroupMember -Identity $GroupName -Members $User #-WhatIf
-						}
-						catch{
-							Write-Log " ERROR: User could not be added to Group!
-	Reason: $_"
-							Write-Host -ForegroundColor Red " ERROR: User could not be added to Group!
-	Reason: $_"
-						}
-				
-						#Write-Host "User added to group" `n -ForegroundColor Green
-					}		
-
-				}
-				else
-				{
-					#If user does not exist, give a warning
-					Write-Log " A user account with username $User does not exist in Active Directory." `n
-					Write-Host -ForegroundColor Red " A user account with username $User does not exist in Active Directory." `n
-					$usercreated = "false"
-	    
-				}
-			}
-		}
+		Read-Host -Prompt "Press any key to continue for safety reasons"
 	}
-	
-	catch {
-        Write-Log "Error: An unexpected error occurred: $_"
-    } 
-	finally {
-        # End logging
-        Write-Log "End of configuration process."
+
+    # Load CSV
+    if (-not (Test-Path $CsvPath)) {
+        Write-Host "ERROR: CSV file not found at $CsvPath" -ForegroundColor Red
+        Write-Log  "ERROR: CSV file missing at $CsvPath"
+        exit
     }
-	
-	Read-Host -Prompt " Press any key"
-	
-}
 
-function Add-UsersToGroups-DE {
-	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\AddUsersToGroups_DE.log"
-	
-	# Function to log messages with timestamps
-    function Write-Log {
-        param (
-            [string]$Message
-        )
-        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-        $logMessage = "[$timestamp] $Message"
-        #Write-Output $logMessage
-        $logMessage | Out-File -FilePath $logFile -Append
+    $GroupMappings = Import-Csv $CsvPath -Delimiter ';'
+    Write-Log "Imported CSV entries: $($GroupMappings.Count)"
+
+    foreach ($Entry in $GroupMappings) {
+
+        $GroupName = $Entry.Name
+        $Members   = $Entry.Members -split ','
+
+        Write-Host "`nProcessing Group: $GroupName" -ForegroundColor Cyan
+        Write-Log  "Processing Group: $GroupName"
+
+        foreach ($ObjectName in $Members) {
+
+            $ObjectName = $ObjectName.Trim()
+
+            # Check if object is a user or group
+            $IsUser  = Get-ADUser  -Filter "SamAccountName -eq '$($ObjectName)'" -ErrorAction SilentlyContinue
+            $IsGroup = Get-ADGroup -Filter "SamAccountName -eq '$($ObjectName)'" -ErrorAction SilentlyContinue
+
+            if (-not $IsUser -and -not $IsGroup) {
+                Write-Host "WARN: AD object '$($ObjectName)' not found." -ForegroundColor Yellow
+                Write-Log  "WARN: AD object '$($ObjectName)' not found."
+                continue
+            }
+
+            $Type = if ($IsUser) { 'User' } else { 'Group' }
+
+            Write-Host "Found $($Type): $ObjectName"
+            Write-Log  "Found $($Type): $ObjectName"
+
+            # Check existing group membership
+            $CurrentMembers = Get-ADGroupMember $GroupName -Recursive | Select-Object -ExpandProperty SamAccountName
+
+            if ($CurrentMembers -contains $ObjectName) {
+                Write-Host "Already in $GroupName" -ForegroundColor Green
+                Write-Log  "Already member of $GroupName"
+                continue
+            }
+
+            # Add to group
+            try {
+                Add-ADGroupMember -Identity $GroupName -Members $ObjectName
+                Write-Host "Added $ObjectName to $GroupName" -ForegroundColor Green
+                Write-Log  "Added $ObjectName to $GroupName"
+            }
+            catch {
+                Write-Host "ERROR: Failed to add $($ObjectName): $_" -ForegroundColor Red
+                Write-Log  "ERROR adding member: $_"
+            }
+        }
     }
-    
-    # Start logging
-    Write-Log " Starting configuration process..."
 
-	#Import active directory module for running AD cmdlets
-	#Import-Module activedirectory
-	  
-	#Store the data from ADUsers.csv in the $ADUsers variable
-	$ImportADGroups = Import-csv -path 'C:\_it\ADC_Setup\5_AD_AddUserToGroup\de-DE\ad_group-list_de_final.csv' -Delimiter ";" #-Encoding utf8 # Standardpfad
-	$response = ""
-	$Domain = ""
-	$DomainName = ""
-	$DomainDistinguishedName = ""
-	$User = ""
-	#$usercreated = "false"
-	
-
-	try{
-		#Input for Domain Name
-		while([string]::IsNullOrEmpty($DomainName)) {
-			Write-Host "-----------------------------------------------------------------------------------"
-			Write-Host "              Active Directory Setup"
-			Write-Host "              Adding Users to Groups"
-			Write-Host -ForegroundColor Yellow "              Edition for ADCs in German"
-			Write-Host "-----------------------------------------------------------------------------------" `n
-			
-			#Checking if a domain was set-up in the first place before running the script
-			try {
-				Write-Log " Try to get AD-Domain"
-				$Domain = get-addomain
-			}
-			catch {
-				Write-Log " ERROR: AD-Domain could not be found! There is no Domain existing in your system. You have to set up the Domain Controller first
-		Reason: $_"
-				Write-Host -ForegroundColor Red "ERROR: AD-Domain could not be found! There is no Domain existing in your system. You have to set up the Domain Controller first
-		Reason: $_"
-				exit
-			}
-			
-			Write-Host " This is your Domain for this Setup"
-			Write-Host "-----------------------------------------------"
-			$DomainName = $Domain.DNSRoot
-			$DomainDistinguishedName = $Domain.DistinguishedName
-			Write-Host " The Domain Name is:" $DomainName -ForegroundColor Green
-			Write-Host " The Domain Distinguished-Name is:" $DomainDistinguishedName -ForegroundColor Green
-			Write-Host "-----------------------------------------------"
-			
-			Write-Log " This is your Domain for this Setup"
-			Write-Log "-----------------------------------------------"
-			Write-Log " The Domain Name is: $DomainName"
-			Write-Log " The Domain Distinguished-Name is: $DomainDistinguishedName"
-			Write-Log "-----------------------------------------------"
-			
-			while($response -ne "y") {
-				Write-Log " Waiting for user input"
-				$response = Read-Host -Prompt "Press (y) to approve and continue or (a) to abort"
-				if($response -eq "a") {
-					Write-Log " User input was (a) to abort."
-					exit
-				}
-			}
-			Read-Host -Prompt "Press any key to continue for safety reasons"
-		}
-
-
-		#Loop through each row containing user details in the CSV file
-		Write-Log " Adding AD Users to AD Groups"
-		foreach ($Group in $ImportADGroups)
-		{
-			#Read user data from each field in each row and assign the data to a variable as below
-			$GroupName = $Group.Name # Gruppenname	
-			$SamAccountNames = $Group.Members #Usernames
-			$GroupMembersArray = $SamAccountNames.Split(',')
-			
-
-			#Read-Host -Prompt "Press any key to continue to check if user exists in AD" # Enable for Debugging
-
-			#Check to see if the user already exists in AD
-			
-			foreach ($User in $GroupMembersArray)
-			{
-				$User = $User.ToString()     
-				Write-Log " Check to see if the user already exists in AD"
-				if (Get-ADUser -F {SamAccountName -eq $User})
-				{
-					#User exist then proceed to put in groups
-					#If user exist
-					Write-Log " A user account with username $User exists in Active Directory."
-					Write-Host -ForegroundColor Green " A user account with username $User exists in Active Directory." `n		
-				
-					$usercreated = "true"
-					
-					Write-Log " User who will be added to Group $Groupname - $User"
-					Write-Host " User who will be added to Group "$Groupname": " $User
-		  
-					#Read-Host -Prompt "Press any key to add user to the group" # Enable for Debugging
-
-					$Members = Get-ADGroupMember -Identity $GroupName -Recursive | Select -ExpandProperty SamAccountName
-					Write-Log " Check to see if the user already is member of group"
-					if($Members -contains $User)
-					{
-						#Is member so do nothing.
-						Write-Log " There is nothing to do! User is already member of group $GroupName"
-						Write-Host -ForegroundColor Yellow " There is nothing to do! User is already member of group $GroupName" `n
-			
-					}
-					else
-					{
-						#Is not member so add user.
-						Write-Log " User is not member of group $GroupName"
-						Write-Log " Adding User..."
-						
-						Write-Host " User is not member of group $GroupName"
-						Write-Host " Adding User..." `n
-						
-						try{
-							Add-ADGroupMember -Identity $GroupName -Members $User #-WhatIf
-						}
-						catch{
-							Write-Log " ERROR: User could not be added to Group!
-	Reason: $_"
-							Write-Host -ForegroundColor Red " ERROR: User could not be added to Group!
-	Reason: $_"
-						}
-				
-						#Write-Host "User added to group" `n -ForegroundColor Green
-					}		
-
-				}
-				else
-				{
-					#If user does not exist, give a warning
-					Write-Log " A user account with username $User does not exist in Active Directory." `n
-					Write-Host -ForegroundColor Red " A user account with username $User does not exist in Active Directory." `n
-					$usercreated = "false"
-	    
-				}
-			}
-		}
-	
-	}
-	catch {
-        Write-Log "Error: An unexpected error occurred: $_"
-    } 
-	finally {
-        # End logging
-        Write-Log "End of configuration process."
-    }
-	
+    Write-Log "=== Finished AD Group Assignment Process ==="
 	Read-Host -Prompt " Press any key"
 }
 
 
-Check-OSLanguage
+# ===============================
+# 5. Entry Point
+# ===============================
+$Cfg = Get-OSLanguageConfig
 
+Add-UsersToGroups -CsvPath $Cfg.CsvPath -LogFilePath $Cfg.LogFile -HeaderText $Cfg.Header
