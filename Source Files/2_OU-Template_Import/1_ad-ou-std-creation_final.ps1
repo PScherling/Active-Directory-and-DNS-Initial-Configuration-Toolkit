@@ -11,7 +11,7 @@
     The script:
     - Reads OU definitions from a structured CSV file located at:
       ```
-      C:\_it\ADC_Setup\2_OU-Template_Import\ad_ou_template_final.csv
+      C:\_psc\ADC_Setup\2_OU-Template_Import\ad_ou_template_final.csv
       ```
     - Retrieves and verifies the current domain configuration using `Get-ADDomain`
     - Constructs full Distinguished Names (DNs) for each OU dynamically
@@ -21,7 +21,7 @@
 
     The script logs all actions, warnings, and errors to:
     ```
-    C:\_it\ADC_Setup\Logfiles\OU-Template-Creation.log
+    C:\_psc\ADC_Setup\Logfiles\OU-Template-Creation.log
     ```
 
     This script is typically executed after domain setup and initial configuration to deploy the 
@@ -67,7 +67,7 @@
 function Create-OU-Template {
 	
 	# Log file path
-    $logFile = "C:\_it\ADC_Setup\Logfiles\OU-Template-Creation.log"
+    $logFile = "C:\_psc\ADC_Setup\Logfiles\OU-Template-Creation.log"
 	
 	# Function to log messages with timestamps
     function Write-Log {
@@ -86,7 +86,7 @@ function Create-OU-Template {
 	#Import active directory module for running AD cmdlets
 	#Import-Module activedirectory
 
-	$ImportADOUs = Import-csv -path 'C:\_it\ADC_Setup\2_OU-Template_Import\ad_ou_template_final.csv' -Delimiter ";" -encoding utf8 # Standardpfad
+	$ImportADOUs = Import-csv -path 'C:\_psc\ADC_Setup\2_OU-Template_Import\ad_ou_template_final.csv' -Delimiter ";" -encoding utf8 # Standardpfad
 	$response = ""
 	$Domain = ""
 	$DomainName = ""
@@ -223,4 +223,5 @@ function Create-OU-Template {
 
 
 Create-OU-Template
+
 
