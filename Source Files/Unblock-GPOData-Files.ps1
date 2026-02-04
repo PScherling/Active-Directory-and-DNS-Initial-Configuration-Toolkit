@@ -62,7 +62,7 @@ param(
     [string] $Path = "D:\GPO-Daten",
 
     [Parameter(Mandatory = $false)]
-    [string] $LogFile = "C:\_it\Unblocking_Data-Files.log",
+    [string] $LogFile = "C:\_psc\Unblocking_Data-Files.log",
 
     [Parameter(Mandatory = $false)]
     [switch] $PauseOnExit
