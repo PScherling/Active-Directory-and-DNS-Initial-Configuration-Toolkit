@@ -1,91 +1,72 @@
 <#
 .SYNOPSIS
-    Automatically unblocks all files within a specified directory, removing the “downloaded from the Internet” security flag applied by Windows.
-	
+  Unblocks files (removes Zone.Identifier / “Mark of the Web”) in a target directory.
+  
 .DESCRIPTION
-	The **custom_Unblock-GPO-Data-Files.ps1** script is designed to **recursively unblock files** within a given folder and its subdirectories.  
-    When files are downloaded or transferred from another computer, Windows marks them as coming from an untrusted source, 
-    which can prevent them from executing or being read correctly by certain tools (e.g., Group Policy Management Console, MDT, or scripts).
+  Recursively scans a directory and removes the Zone.Identifier alternate data stream
+  from each file using Unblock-File. This is commonly required when GPO backup/data
+  files were copied from another system or downloaded and are considered untrusted by Windows.
 
-	This script:
-    - Scans a specified directory (default: `D:\GPO-Daten`)
-    - Recursively unblocks all files within that directory
-    - Logs every action and file processed
-    - Provides visual progress and clear console feedback
-    - Offers user input for custom paths and confirmation before execution
+  Use -WhatIf first to verify what would be changed.
 
-    **Typical Use Case:**
-    When importing GPO backup data or configuration templates from another environment, Windows often blocks the `.pol`, `.xml`, `.inf`, or `.ps1` files.  
-    Running this script ensures all such files are accessible and executable by removing their security “Zone.Identifier” metadata.
+.PARAMETER Path
+  Root directory containing the files to unblock.
+  Default: D:\GPO-Daten
 
-    **Key Features:**
-    - Interactive path selection (default or custom directory)
-    - Validates directory existence before processing
-    - Recursively processes all subfolders and files
-    - Logs every operation with timestamps
-    - Displays color-coded console messages for user clarity
-    - Safe and idempotent (can be run multiple times without harm)
+.PARAMETER LogFile
+  Path to the log file. The parent folder is created if missing.
+  Default: C:\_psc\Unblocking_Data-Files.log
 
-    **Default Path:**
-    ```
-    D:\GPO-Daten
-    ```
+.PARAMETER PauseOnExit
+  If set, prompts before exiting (useful when running interactively).
 
-    **Log File Location:**
-    ```
-    C:\_it\Unblocking_GPO-Data-Files.log
-    ```
-
-    **Command Used:**
-    ```
-    Unblock-File -Path <FileName>
-    ```
-
-    **Common Use Scenarios:**
-    - Unblocking Group Policy backup files before import.
-    - Cleaning up deployment packages transferred from another environment.
-    - Removing security flags from scripts, templates, or utilities after ZIP extraction.
-    - Preparing files for automated deployment in CI/CD pipelines or MDT task sequences.
-
-	Requirements:
-            - PowerShell 5.1 or later
-            - Administrative privileges (recommended)
-            - Read/write access to the target directory
-            - Execution policy allowing script execution
     
 .LINK
-	https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file
-    https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-smartscreen/how-smartscreen-works
-    https://ss64.com/ps/unblock-file.html
 	https://github.com/PScherling
     
 .NOTES
           FileName: custom_Unblock-GPO-Data-Files.ps1
-          Solution: File Security Automation
+          Solution: Set GPO-Data Files on a share as trsutworthy
           Author: Patrick Scherling
           Contact: @Patrick Scherling
           Primary: @Patrick Scherling
           Created: 2025-07-10
-          Modified: 2025-10-17
+          Modified: 2026-02-04
 
           Version - 0.0.1 - () - Finalized functional version 1.
 		  Version - 0.0.2 - () - Fixed: Bug by User Input that gets ignored.
+          Version - 0.0.3 - (2026-02-04) - Adding Parameter
 
           TODO:
-		  	- Add progress indicator (e.g., percentage or status bar).
-            - Include file count summary in the log.
-            - Optionally support network paths and UNC validation.
-            - Add parameter support for silent/non-interactive mode.
-            - Implement exclusion filters (e.g., skip large files or certain extensions).
+
+Requirements / Notes for admins:
+- Unblock-File removes the Zone.Identifier ADS. This is supported on NTFS.
+  On non-NTFS storage or some shares, the ADS may not exist or may not be supported.
+- Run with sufficient permissions to read/write the target directory contents.
+		  
 		
 .Example
-	PS C:\> .\custom_Unblock-GPO-Data-Files.ps1
-    Launches the script, asks for a directory path, and unblocks all files 
-    in that directory and its subfolders. Default path is `D:\GPO-Daten`.
+  .\custom_Unblock-Data-Files.ps1
+  Uses the default path (D:\GPO-Daten) and logs to C:\_it\Unblocking_Data-Files.log.
 
-    PS C:\> powershell.exe -ExecutionPolicy Bypass -File "C:\_it\custom_Unblock-GPO-Data-Files.ps1"
-    Runs the script in bypass mode, ideal for automated deployment or MDT/SCCM task sequences.
+  .\custom_Unblock-Data-Files.ps1 -Path "D:\Data\GPO" -WhatIf
+  Shows what would be unblocked without making changes.
+
+  .\custom_Unblock-Data-Files.ps1 -Path "\\fileserver\share\GPO-Daten" -LogFile "D:\Logs\unblock.log" -Verbose
+  Runs against a share path (if supported by the underlying filesystem) with verbose output.
+
 #>
+[CmdletBinding(SupportsShouldProcess = $true)]
+param(
+    [Parameter(Mandatory = $false)]
+    [string] $Path = "D:\GPO-Daten",
+
+    [Parameter(Mandatory = $false)]
+    [string] $LogFile = "C:\_psc\Unblocking_Data-Files.log",
+
+    [Parameter(Mandatory = $false)]
+    [switch] $PauseOnExit
+)
 
 # Function to log messages with timestamps
 function Write-Log {
@@ -99,37 +80,46 @@ function Write-Log {
 }
 
 
-function Unblock_GPO-Data-Files($Path) {
-    Write-Log "Unblocking Files..."
-	
-    Get-ChildItem -Path $Path -Recurse -File -Force | ForEach-Object {
-        Write-Log "Unblocking File: $($_.FullName)"
-        Write-Host "Unblocking File: $($_.FullName)"
-        try{            
-            Unblock-File -Path $_.FullName #-WhatIf
+function Start-UnblockDataFiles {
+    param(
+      [Parameter(Mandatory)] [string] $TargetPath
+    )
+    
+    Write-Log "Unblocking files in '$TargetPath' ..."
+
+    # Enumerate files (silently skip folders we can't access)
+    $files = Get-ChildItem -Path $TargetPath -Recurse -File -Force -ErrorAction SilentlyContinue
+
+    foreach ($f in $files) {
+        Write-Log  "Unblocking file: $($f.FullName)"
+        Write-Host "Unblocking file: $($f.FullName)"
+
+        try {
+            if ($PSCmdlet.ShouldProcess($f.FullName, "Unblock-File")) {
+                Unblock-File -Path $f.FullName -ErrorAction Stop
+            }
+            Write-Log  "File unblocked."
+            Write-Host -ForegroundColor Green "File unblocked."
         }
-        catch{
-            Write-Warning "Failed to unblock: $($_.FullName)"
-            Write-Log "Failed to unblock: $($_.FullName)"
-        }
-        finally {
-            Write-Log "File Unblocked."
-            Write-Host -ForegroundColor Green "File Unblocked."
+        catch {
+            Write-Warning "Failed to unblock: $($f.FullName) ($($_.Exception.Message))"
+            Write-Log     "FAILED: $($f.FullName) ($($_.Exception.Message))"
         }
     }
-    
-    # End logging
+
     Write-Log "End of configuration process."
-	
-	Read-Host -Prompt " Press any key to leave"
 }
 
 
 
 
 Clear-Host
-# Log file path
-$logFile = "C:\_it\Unblocking_GPO-Data-Files.log"
+# Ensure log folder exists
+$logDir = Split-Path -Parent $LogFile
+if ($logDir -and -not (Test-Path $logDir)) {
+    New-Item -Path $logDir -ItemType Directory -Force | Out-Null
+}
+
 
 # Start logging
 Write-Log " Starting configuration process..."
@@ -146,40 +136,31 @@ Write-Host -ForegroundColor Cyan "
     +----+ +----+       
 "
 Write-Host "-----------------------------------------------------------------------------------"
+# If user explicitly passed -Path, we trust it (still validate). If they didn't pass anything,
+# you still get a default; optionally allow interactive override:
+$destPath = $Path
 
-do {
-    Write-Host "`n Please enter the path to unblock the files or press Enter to use the default location."
-    $rawInput = Read-Host " (Default: 'D:\GPO-Daten')"
-    Write-Log " User Input for directory: $rawInput"
-
-    # Resolve default vs custom
-    if ([string]::IsNullOrWhiteSpace($rawInput)) {
-        $destPath = "D:\GPO-Daten"
-    } else {
-        $destPath = $rawInput
-    }
-
-    Write-Host -ForegroundColor Yellow " Directory is '$destPath'"
-    Write-Log " Directory is '$destPath'"
-
-    # Validate directory exists
-    if (-not (Test-Path -Path $destPath -PathType Container)) {
-        Write-Host -ForegroundColor Yellow " WARNING: The directory '$destPath' does not exist."
-        Write-Log  " WARNING: The directory '$destPath' does not exist."
-        $destPath = $null
-        continue
-    }
-
-    # Confirm
-    $continue = Read-Host " Do you want to continue? (y/n)"
-
-} while ([string]::IsNullOrWhiteSpace($destPath) -or ($continue -notmatch '^(?i)y$|^(?i)n$'))
-
-if ($continue -match '^(?i)y$') {
-    Unblock_GPO-Data-Files -Path $destPath
-    Write-Log " Unblock_GPO-Data-Files executed for '$destPath'."
-} else {
-    Write-Log " User chose to abort."
+if (-not (Test-Path -Path $destPath -PathType Container)) {
+    Write-Host -ForegroundColor Yellow "WARNING: The directory '$destPath' does not exist."
+    Write-Log  "WARNING: The directory '$destPath' does not exist."
+    if ($PauseOnExit) { Read-Host -Prompt "Press Enter to exit" }
+    return
 }
 
+# Optional confirmation (interactive)
+$continue = "y"
+if ($Host.Name -match "ConsoleHost") {
+    $continue = Read-Host "Directory is '$destPath'. Continue? (y/n)"
+}
 
+if ($continue -match '^(?i)y$') {
+    Start-UnblockDataFiles -TargetPath $destPath
+    Write-Log "Unblock executed for '$destPath'."
+}
+else {
+    Write-Log "User chose to abort."
+}
+
+if ($PauseOnExit) {
+    Read-Host -Prompt "Press Enter to exit"
+}
